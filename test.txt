@@ -1,0 +1,46 @@
+-- this is a test file
+-- with multiple lines
+-- DIALECT : postgres
+         -- VERSION : 0.0.1
+-- OUTPUT : ./output/
+    -- other various comments here
+-- ENDHEAD ::
+
+-- some other line comments
+        -- yet another comment
+/* block comment before group */
+/* startgroup : test :OUTPUT: qwerty */
+/* block comment after group */
+
+-- comment within the group
+
+SELECT * FROM tbl1;
+
+/* startgrouP:nested_test*/
+/* multiline
+meta
+                 comment
+*  OUTPUT: asdf
+
+                 */
+    CREATE VIEW multiline_sql AS
+        SELECT
+        id AS identiy,
+        name AS name
+        FROM tbl1 -- comment within query
+    WHERE id > 1;
+
+/* ENDGROUP:nested_test*/
+/* endgroup : test */
+
+PREPARE test_sql_query AS
+    SELECT * FROM test  -- coment withing query
+    WHERE "test"."asdf" = 'test_str';
+
+
+PREPARE test_sql_query2 AS
+    SELECT * FROM test 
+    WHERE test.asdf = 'test_str';
+    
+-- comment after teh group
+/* block comment after group */
